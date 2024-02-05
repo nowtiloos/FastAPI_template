@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fastapi-template"
+version = "0.1.0"
+description = "My FastAPI template"
+authors = ["nowtiloos nowtiloos@gmail.com"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.109.2"}
+sqlalchemy = "^2.0.25"
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+python-multipart = "^0.0.7"
+passlib = "^1.7.4"
+python-jose = "^3.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

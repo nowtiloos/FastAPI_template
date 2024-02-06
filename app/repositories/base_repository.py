@@ -34,7 +34,7 @@ class SQLAlchemyRepository(IRepository):
         stmt = delete(self.model).filter_by(**filter_by)
         await self.session.execute(stmt)
 
-    async def edit_one(self, id: int, data: dict) -> int:
+    async def edit_one(self, id: str, data: dict) -> int:
         stmt = update(self.model).values(**data).filter_by(id=id).returning(self.model.id)
         result = await self.session.execute(stmt)
         return result.scalar_one()

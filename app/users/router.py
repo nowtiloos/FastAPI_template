@@ -23,14 +23,14 @@ async def get_all_users(users_services: UsersServices = Depends(get_users_servic
 
 
 @router.get("/{id}")
-async def get_user_by_id(user_id: int,
+async def get_user_by_id(user_id: str,
                          users_services: UsersServices = Depends(get_users_services)
                          ) -> SUser | None:
     return await users_services.get_user(user_id=user_id)
 
 
 @router.patch("/{id}/edit")
-async def edit_user(user_id: int,
+async def edit_user(user_id: str,
                     data: SUserEdit,
                     users_services: UsersServices = Depends(get_users_services)
                     ) -> SUserEditResponse:
@@ -38,7 +38,7 @@ async def edit_user(user_id: int,
 
 
 @router.delete("{id}")
-async def delete_user(user_id: int,
+async def delete_user(user_id: str,
                       users_services: UsersServices = Depends(get_users_services)
                       ) -> SUserDeleteResponse:
     return await users_services.delete_user(user_id)

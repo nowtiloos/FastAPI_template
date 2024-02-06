@@ -25,7 +25,7 @@ class SUserEdit(BaseModel):
 
 class SUserDeleteResponse(BaseModel):
     message: str
-    user_id: int
+    user_id: str
 
 
 class SUserEditResponse(SUserDeleteResponse):

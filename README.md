@@ -20,7 +20,7 @@ poetry install
 
 ### Запуск проекта
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ### Документация API

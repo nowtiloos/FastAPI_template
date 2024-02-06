@@ -41,7 +41,6 @@ class SUserLogin(BaseModel):
 
 class SUserRegister(SUserLogin):
     name: str
-    role_id: int = 3
 
 
 class SPasswordUpdate(BaseModel):

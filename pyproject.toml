@@ -2,7 +2,7 @@
 name = "fastapi-template"
 version = "0.1.0"
 description = "My FastAPI template"
-authors = ["nowtiloos nowtiloos@gmail.com"]
+authors = ["nowtiloos <nowtiloos@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

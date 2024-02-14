@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends
 
 from app.dependencies.auth import get_current_user
@@ -31,7 +33,7 @@ async def get_user_by_id(user_id: str,
 
 @router.patch("/{id}/edit")
 async def edit_user(user_id: str,
-                    data: SUserEdit,
+                    data: Annotated[SUserEdit, Depends()],
                     users_services: UsersServices = Depends(get_users_services)
                     ) -> SUserEditResponse:
     return await users_services.edit_user(user_id, data)

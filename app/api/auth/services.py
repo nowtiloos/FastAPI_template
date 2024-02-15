@@ -58,7 +58,7 @@ class AuthServices:
 
     async def login_user(self, response: Response, user_data: SUserLogin):
         user = await self.authenticate_user(user_data.email, user_data.password)
-        access_token = self.create_access_token({"sub": user.name})
+        access_token = self.create_access_token({"sub": str(user.id)})
         response.set_cookie(settings.TOKEN_NAME, access_token, httponly=True)
         return {"message": "Успешный вход в систему", "access_token": access_token}
 

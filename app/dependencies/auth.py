@@ -22,11 +22,11 @@ async def get_current_user(unit_of_work: IUnitOfWork = Depends(get_unit_of_work)
         raise TokenExpiredException
     except JWTError:
         raise IncorrectTokenFormatException
-    user_name: str = payload.get("sub")
-    if not user_name:
+    user_id: str = payload.get("sub")
+    if not user_id:
         raise UserIsNotPresentException
     async with unit_of_work as uow:
-        user = await uow.users_repository.find_one_or_none(name=user_name)
+        user = await uow.users_repository.find_one_or_none(id=user_id)
     if not user:
         raise UserIsNotPresentException
     return user

@@ -8,7 +8,6 @@ class SUser(BaseModel):
     id: uuid.UUID
     name: str
     email: str
-    hashed_password: str
     created_at: datetime
     is_active: bool
     is_verified: bool
@@ -19,11 +18,11 @@ class SUser(BaseModel):
 
 
 class SUserEdit(BaseModel):
-    name: str = None
-    email: str = None
-    is_active: bool = None
-    is_verified: bool = None
-    is_superuser: bool = None
+    name: str | None = None
+    email: str | None = None
+    is_active: bool | None = None
+    is_verified: bool | None = None
+    is_superuser: bool | None = None
 
 
 class SUserDeleteResponse(BaseModel):

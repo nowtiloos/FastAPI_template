@@ -1,5 +1,5 @@
 from app.interfaces.unit_of_work import IUnitOfWork
-from app.users.schemas import SUserEdit
+from app.api.users.schemas import SUserEdit
 
 
 class UsersServices:

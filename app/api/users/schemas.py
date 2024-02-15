@@ -19,8 +19,11 @@ class SUser(BaseModel):
 
 
 class SUserEdit(BaseModel):
-    name: str
+    name: str = None
     email: str = None
+    is_active: bool = None
+    is_verified: bool = None
+    is_superuser: bool = None
 
 
 class SUserDeleteResponse(BaseModel):

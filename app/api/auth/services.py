@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from fastapi import Response
 
-from app.auth.schemas import SUserRegister, SUserLogin
+from app.api.auth.schemas import SUserRegister, SUserLogin
 from app.config import settings
 from app.exceptions.exceptions import IncorrectEmailOrPasswordException, UserAlreadyExistsException, \
     CannotAddDataToDatabase

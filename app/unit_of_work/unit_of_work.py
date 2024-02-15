@@ -3,7 +3,7 @@ from types import TracebackType
 from app.database import async_session_maker
 from app.interfaces.unit_of_work import IUnitOfWork
 
-from app.users.repository import UsersRepository
+from app.api.users.repository import UsersRepository
 
 
 class SQLAlchemyUnitOfWork(IUnitOfWork):

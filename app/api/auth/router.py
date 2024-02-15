@@ -2,8 +2,8 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Response
 
-from app.auth.schemas import SUserRegister, SRegisterResponse, SUserLogin, SLoginResponse, SLogoutResponse
-from app.auth.services import AuthServices
+from app.api.auth.schemas import SUserRegister, SRegisterResponse, SUserLogin, SLoginResponse, SLogoutResponse
+from app.api.auth.services import AuthServices
 from app.dependencies.services import get_auth_services
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])

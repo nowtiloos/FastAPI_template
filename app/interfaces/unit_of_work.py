@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from types import TracebackType
 
-from app.users.repository import UsersRepository
+from app.api.users.repository import UsersRepository
 
 
 class IUnitOfWork(ABC):

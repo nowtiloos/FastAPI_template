@@ -1,8 +1,8 @@
 from fastapi import Depends
 
-from app.auth.services import AuthServices
+from app.api.auth.services import AuthServices
 from app.dependencies.unit_of_work import get_unit_of_work
-from app.users.services import UsersServices
+from app.api.users.services import UsersServices
 from app.interfaces.unit_of_work import IUnitOfWork
 
 

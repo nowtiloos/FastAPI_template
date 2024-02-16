@@ -59,6 +59,7 @@ class SRegisterResponse(BaseModel):
 
 class SLoginResponse(SRegisterResponse):
     access_token: str
+    refresh_token: str
 
 
 class SLogoutResponse(SRegisterResponse):

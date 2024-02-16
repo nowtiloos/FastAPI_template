@@ -15,6 +15,7 @@ class User(Base):
     name: Mapped[str]
     email: Mapped[str]
     hashed_password: Mapped[str]
+    refresh_token: Mapped[str] = mapped_column(nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=func.now())
     is_active: Mapped[bool] = mapped_column(default=True)
     is_verified: Mapped[bool] = mapped_column(default=False)

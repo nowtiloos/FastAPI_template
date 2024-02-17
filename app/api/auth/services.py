@@ -10,29 +10,8 @@ from passlib.context import CryptContext
 from jose import jwt
 from pydantic import EmailStr
 
-pwd_context = CryptContext(schemes="bcrypt", deprecated="auto")
 
-
-class AuthServices:
-    def __init__(self, unit_of_work: IUnitOfWork) -> None:
-        self.unit_of_work = unit_of_work
-
-    @staticmethod
-    def get_password_hash(password: str) -> str:
-        return pwd_context.hash(password)
-
-    @staticmethod
-    def verify_password(plain_password, hashed_password) -> bool:
-        return pwd_context.verify(plain_password, hashed_password)
-
-    @staticmethod
-    def create_access_token(data: dict) -> str:
-        to_encode = data.copy()
-        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-        to_encode.update({'exp': expire})
-        encoded_jwt = jwt.encode(claims=to_encode, key=settings.SECRET_KEY, algorithm=settings.ALGORITHM)
-        return encoded_jwt
-
+class TokenManager:
     @staticmethod
     def create_tokens(data: dict) -> tuple:
         # Создаем access token
@@ -48,6 +27,19 @@ class AuthServices:
         refresh_token = jwt.encode(refresh_token_data, key=settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
         return access_token, refresh_token
+
+
+class AuthServices:
+    def __init__(self, unit_of_work: IUnitOfWork, token_manager: TokenManager) -> None:
+        self.unit_of_work = unit_of_work
+        self.token_manager = token_manager
+        self.pwd_context = CryptContext(schemes="bcrypt", deprecated="auto")
+
+    def get_password_hash(self, password: str) -> str:
+        return self.pwd_context.hash(password)
+
+    def verify_password(self, plain_password, hashed_password) -> bool:
+        return self.pwd_context.verify(plain_password, hashed_password)
 
     async def authenticate_user(self, email: EmailStr, password: str):
         async with self.unit_of_work as uow:
@@ -75,7 +67,7 @@ class AuthServices:
     async def login_user(self, response: Response, user_data: SUserLogin):
         user = await self.authenticate_user(user_data.email, user_data.password)
         # create tokens
-        access_token, refresh_token = self.create_tokens({"sub": str(user.id)})
+        access_token, refresh_token = self.token_manager.create_tokens({"sub": str(user.id)})
         # set access token to cookie
         response.set_cookie(settings.TOKEN_NAME, access_token, httponly=True)
         # set refresh token to db
